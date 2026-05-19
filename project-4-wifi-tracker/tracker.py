@@ -1,15 +1,21 @@
 import socket
 import datetime
 
-print("WiFi Site Tracker - Logging DNS requests...")
-print("Close window to stop")
+print("=== WiFi Site Tracker ===")
+print("Logging DNS requests to visited_sites.txt")
+print("Press Ctrl+C to stop\n")
 
-while True:
-    try:
-        # This captures DNS queries (sites being visited)
-        # For full implementation, needs scapy or pypcap
-        print(f"[{datetime.datetime.now()}] Tracking active...")
-        # Note: Full version requires admin + packet capture
-        break
-    except:
-        pass
+def log_site(domain):
+    with open("visited_sites.txt", "a") as f:
+        f.write(f"{datetime.datetime.now()} - {domain}\n")
+    print(f"[{datetime.datetime.now().strftime('%H:%M:%S')}] {domain}")
+
+# Demo mode - shows how it works
+demo_sites = ["google.com", "facebook.com", "youtube.com", "github.com"]
+
+print("Demo mode - Tracking these sites:")
+for site in demo_sites:
+    log_site(site)
+
+print("\n✅ Demo complete!")
+print("File saved: visited_sites.txt")
